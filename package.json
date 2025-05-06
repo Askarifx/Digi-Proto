@@ -1,0 +1,49 @@
+// File: app/feed/page.tsx
+'use client';
+
+import React, { useState, useEffect } from 'react';
+
+const trendingMock = [
+  {
+    id: 1,
+    creator: 'Jasmine Rivers',
+    avatar: '/avatar.jpg',
+    title: 'Sunrise Stretch Routine',
+    image: '/post1.jpg'
+  },
+  {
+    id: 2,
+    creator: 'Amy Chen',
+    avatar: '/avatar2.jpg',
+    title: 'Abstract Flow',
+    image: '/art1.jpg'
+  }
+];
+
+export default function FeedPage() {
+  const [content, setContent] = useState([]);
+
+  useEffect(() => {
+    setContent(trendingMock);
+  }, []);
+
+  return (
+    <main className="min-h-screen bg-[#1B1B1F] text-white p-6">
+      <h1 className="text-3xl font-bold mb-8 text-center text-[#00FFC8]">Trending Free Content</h1>
+      <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 max-w-6xl mx-auto">
+        {content.map((item) => (
+          <div key={item.id} className="bg-[#26262C] rounded-lg overflow-hidden shadow-md hover:scale-[1.02] transition-transform">
+            <img src={item.image} alt={item.title} className="w-full h-48 object-cover" />
+            <div className="p-4">
+              <div className="flex items-center gap-3 mb-2">
+                <img src={item.avatar} alt={item.creator} className="w-10 h-10 rounded-full border" />
+                <p className="font-semibold">{item.creator}</p>
+              </div>
+              <p className="text-sm text-gray-400">{item.title}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </main>
+  );
+}
